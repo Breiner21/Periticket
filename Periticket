@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    
+
+    <title>Iniciar sesi&#243;n - Periticket</title>
+
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+
+    
+
+</head>
+<body class="BodyNormal">
+    
+
+
+<script src="/Scripts/jquery-2.1.1.min.js"></script>
+
+<link href="/Content/StyleLogin.css" rel="stylesheet" />
+<script src="/Scripts/jquery.blockUI.js"></script>
+
+<script>
+
+    localStorage.removeItem("chat");
+
+    if (typeof $.blockUI !== "undefined") {
+        $.blockUI.defaults = {
+            // message displayed when blocking (use null for no message)
+            message: '',
+
+            title: null,        // title string; only used when theme == true
+            draggable: true,    // only used when theme == true (requires jquery-ui.js to be loaded)
+
+            theme: false, // set to true to use with jQuery UI themes
+
+            // styles for the message when blocking; if you wish to disable
+            // these and use an external stylesheet then do this in your code:
+            // $.blockUI.defaults.css = {};
+            css: {
+                padding: 0,
+                margin: 0,
+                width: '30%',
+                top: '40%',
+                left: '35%',
+                textAlign: 'center',
+                color: '#fff',
+                cursor: 'wait'
+            },
+
+            // minimal style set used when themes are used
+            themedCSS: {
+                width: '30%',
+                top: '40%',
+                left: '35%'
+            },
+
+            // styles for the overlay
+            overlayCSS: {
+                backgroundColor: '#000',
+                opacity: 0.8,
+                cursor: 'wait'
+            },
+
+            // style to replace wait cursor before unblocking to correct issue
+            // of lingering wait cursor
+            cursorReset: 'default',
+
+            // styles applied when using $.growlUI
+            growlCSS: {
+                width: '350px',
+                top: '10px',
+                left: '',
+                right: '10px',
+                border: 'none',
+                padding: '5px',
+                opacity: 0.6,
+                cursor: null,
+                color: '#fff',
+                backgroundColor: '#000',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px'
+            },
+
+            iframeSrc: /^https/i.test(window.location.href || '') ? 'javascript:false' : 'about:blank',
+
+            forceIframe: false,
+
+            baseZ: 1000,
+
+            centerX: true, // <-- only effects element blocking (page block controlled via css above)
+            centerY: true,
+
+            // allow body element to be stetched in ie6; this makes blocking look better
+            // on "short" pages.  disable if you wish to prevent changes to the body height
+            allowBodyStretch: true,
+
+            // enable if you want key and mouse events to be disabled for content that is blocked
+            bindEvents: true,
+
+            // be default blockUI will supress tab navigation from leaving blocking content
+            // (if bindEvents is true)
+            constrainTabKey: true,
+
+            // fadeIn time in millis; set to 0 to disable fadeIn on block
+            fadeIn: 200,
+
+            // fadeOut time in millis; set to 0 to disable fadeOut on unblock
+            fadeOut: 400,
+
+            // time in millis to wait before auto-unblocking; set to 0 to disable auto-unblock
+            timeout: 0,
+
+            // disable if you don't want to show the overlay
+            showOverlay: true,
+
+            // if true, focus will be placed in the first available input field when
+            // page blocking
+            focusInput: true,
+            onBlock: null,
+            onUnblock: null,
+            quirksmodeOffsetHack: 4,
+            blockMsgClass: 'blockMsg',
+            ignoreIfBlocked: false
+        };
+    }
+</script>
+
+<form action="/Account/Login" class="form-signin" id="loginFormulario" method="post" role="form">    <div class="row text-center topNormal" id="top">
+        <div class="col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+            <div class="">
+                <img src="/Images/Login/peritickets-id.png" style="width:100%" />
+                <br />
+                <h5>Realiza solicitudes, resuelve tareas y optimiza todos tus procesos</h5>
+                <br />
+                
+            </div>
+
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+            <span id="reauth-email" class="reauth-email"></span>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1" style="background-color:#529d26;border-radius: 0px;border:0;">
+                    <img src="/Images/Login/mensaje-icono.png" style="width:20px;" />
+                </span>
+                <input type="email" name="Email" id="Email" class="form-control" placeholder="Correo Electronico" required autofocus />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            </div>
+
+            <br />
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1" style="background-color:#529d26;border-radius: 0px;border:0;">
+                    <img src="/Images/Login/contrasena-icono.png" style="width:20px;" />
+                </span>
+                <input type="password" name="Password" id="Password" class="form-control" placeholder="Contraseña" required autofocus />
+                <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+            </div>
+            
+            <br />
+
+            <button id="btnLog" class="btn btn-lg btn-primary form-control" style="border:0; border-radius:0;background-color:#529d26" type="submit">Iniciar sesión</button>
+        </div>
+    </div>
+</form>
+
+<div class="row text-center" style="margin-top:10px">
+    <div class="col-md-3 col-md-offset-4 col-lg-3 col-lg-offset-4 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+        <a href="/Account/ForgotPassword?Style=color%3A%23529d26">&#191;Ha olvidado su contrase&#241;a?</a>
+    </div>
+</div>
+
+<div class="row" style="margin-top:100px">
+    <div class="col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3 col-sm-4 col-sm-offset-4 col-xs-10 col-xs-offset-1">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img src="/Images/Login/periferia-corp-id.png" style="width:100%;max-width:100px" />
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img src="/Images/Login/coolexpress-id.png" style="width:100%;max-width:100px" />
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <img src="/Images/Login/cbit-id.jpg" style="width:100%;max-width:100px" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <section class="sidebar" style="float:right;">
+        <div class="sidebar-menu">
+            <a href="https://www.facebook.com/periferiaitgroup/" target="_blank"><img src="/Images/Login/fb-btn.png" /></a>
+            <a href="https://twitter.com/periferiait" target="_blank"><img src="/Images/Login/tw-btn.png" /></a>
+            <a href="https://www.linkedin.com/company/10572423/" target="_blank"><img src="/Images/Login/insta-btn.png" /></a>
+            <a href="https://www.youtube.com/channel/UCQxb7wRE9430Q2tJ1j3zGaA?view_as=subscriber " target="_blank"><img src="/Images/Login/youtube-btn.png" /></a>
+            <a href="https://plus.google.com/+PeriferiaITGroup" target="_blank"><img src="/Images/Login/plus-btn.png" /></a>
+            <a href="https://www.instagram.com/periferiaitgroup/" target="_blank"><img src="/Images/Login/insta-btn2.png" /></a>
+        </div>
+        
+    </section>
+</div>
+<script>
+
+	$(window).resize(function (e) {
+
+		if ($(window).width() < 751) {
+			$("body").removeClass("BodyNormal");
+			$("body").addClass("BodyMini");
+			$("#top").removeClass("topNormal");
+			$("#top").addClass("topMini");
+
+		} else {
+			$("body").removeClass("BodyMini");
+			$("body").addClass("BodyNormal");
+			$("#top").removeClass("topMini");
+			$("#top").addClass("topNormal");
+		}
+	});
+
+
+    $(document).ready(function () {
+
+
+	    $("#loginFormulario").submit(function() {
+		    $("#btnLog").hide();
+
+		    $.blockUI();
+
+
+	    });
+
+    });
+
+</script>
+</body>
+</html>
